@@ -1,4 +1,4 @@
-import { Schema, Types, model, models } from "mongoose";
+import mongoose, { Schema, model, Types } from "mongoose";
 
 const schema = new Schema(
   {
@@ -7,6 +7,7 @@ const schema = new Schema(
       default: "pending",
       enum: ["pending", "accepted", "rejected"],
     },
+
     sender: {
       type: Types.ObjectId,
       ref: "User",
@@ -23,4 +24,4 @@ const schema = new Schema(
   }
 );
 
-export const Request = models.Request || model("Request", schema);
+export const Request = mongoose.models.Request || model("Request", schema);

@@ -1,8 +1,9 @@
-import { Schema, Types, model, models } from "mongoose";
+import mongoose, { Schema, model, Types } from "mongoose";
 
 const schema = new Schema(
   {
     content: String,
+
     attachments: [
       {
         public_id: {
@@ -15,6 +16,7 @@ const schema = new Schema(
         },
       },
     ],
+
     sender: {
       type: Types.ObjectId,
       ref: "User",
@@ -31,4 +33,4 @@ const schema = new Schema(
   }
 );
 
-export const Message = models.message || model("Message", schema);
+export const Message = mongoose.models.Message || model("Message", schema);
