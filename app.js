@@ -5,6 +5,7 @@ import { connectDB } from "./utils/features.js";
 import dotenv from "dotenv";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
+import { createUser } from "./seeders/user.js";
 
 const app = express();
 dotenv.config({
@@ -15,6 +16,7 @@ const mongoURI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 3000;
 
 connectDB(mongoURI);
+// createUser(10);
 
 app.use(express.json());
 app.use(cookieParser());
