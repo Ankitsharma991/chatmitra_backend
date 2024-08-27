@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "acceptrequest",
         "addmembers",
         "Cloudinary",
-        "removemember"
+        "removemember",
+        "sendrequest"
     ]
 }
