@@ -12,6 +12,9 @@ import { getOtherMember } from "../lib/helper.js";
 export const newUser = async (req, res, next) => {
   const { name, username, password, bio } = req.body;
 
+  const file = req.body.avatar;
+  if (!file) return next(new ErrorHandler("Please Upload Avatar", 401));
+
   const userExists = await User.findOne({ username });
   if (userExists) return next(new ErrorHandler("username already exists", 404));
 

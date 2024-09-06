@@ -1,6 +1,7 @@
 import express from "express";
 import userRoute from "./routes/user.js";
 import chatRoute from "./routes/chat.js";
+import adminRoute from "./routes/admin.js";
 import { connectDB } from "./utils/features.js";
 import dotenv from "dotenv";
 import { errorMiddleware } from "./middlewares/error.js";
@@ -19,6 +20,8 @@ dotenv.config({
 
 const mongoURI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 3000;
+export const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
+export const adminSecretKey = process.env.ADMIN_SECRET_KEY || "chat_mitra";
 
 connectDB(mongoURI);
 // createUser(10);
@@ -31,6 +34,7 @@ app.use(cookieParser());
 
 app.use("/user", userRoute);
 app.use("/chat", chatRoute);
+app.use("/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.send("Welcome to ChatMitra!!");
@@ -38,5 +42,7 @@ app.get("/", (req, res) => {
 
 app.use(errorMiddleware);
 app.listen(PORT, () => {
-  console.log(`Server is running on port 3000 ${PORT}`);
+  console.log(
+    `Server is running on port ${PORT} in ${process.env.NODE_ENV} Mode`
+  );
 });
